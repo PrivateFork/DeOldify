@@ -157,7 +157,7 @@ class SelfAttention(nn.Module):
         value2D.weight = nn.Parameter(self.value.weight.view(value2DShape[0], value2DShape[1], value2DShape[2], 1))
         value2D.bias = nn.Parameter(self.value.bias.view(value2DShape2[0]))
         
-        flatten2D = input.view(int(shape[0]), int(shape[1]), int(shape[2]), 1)
+        flatten2D = input.view(int(shape[0]), int(shape[1]), int(shape[2]) * int(shape[3]), 1)
         
         query = query2D(flatten2D)
         query = query.permute(0, 2, 1, 3)
