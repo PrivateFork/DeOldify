@@ -172,14 +172,13 @@ class SelfAttention(nn.Module):
         #query_key = query_key.view(1, int(query_key.shape[0]), int(query_key.shape[1]))
         #query_key = query_key.view(1, int(14400), int(14400))
 
-        #attn = query_key
-        #for x in range(int(attn.shape[1])):
-        #    attn[:, x] = F.softmax(attn[:, x])
-        
         ###TODEBG
         query_key = input
         ###TODEBG
-        attn = F.softmax(query_key, 1)
+        attn = query_key
+        
+        for x in range(int(attn.shape[1])):
+            attn[:, x] = F.softmax(attn[:, x])
         
         #attn = torch.bmm(value, attn)
         #attn_zeros = torch.zeros([1024, 14400]) 
