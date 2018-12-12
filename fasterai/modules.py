@@ -165,7 +165,7 @@ class SelfAttention(nn.Module):
         key = key2D(flatten2D)
         value = value2D(flatten2D)
         
-        query_key = torch.bmm(query, key)
+        query_key = torch.bmm(query.view(1, 14400, 128), key.view(1, 128, 14400))
         #query_zeros = torch.zeros([14400, 14400]) 
         #query_key = torch.addmm(query_zeros, query.view(14400, 128), key.view(128, 14400))
         #query_key = self.multi(query.view(14400, 128), key.view(128, 14400))
@@ -182,8 +182,8 @@ class SelfAttention(nn.Module):
         for x in range(int(attn.shape[1])):
             attn[:, x] = F.softmax(attn[:, x])
         
-        attn = torch.bmm(value, attn)
-        attn_zeros = torch.zeros([1024, 14400]) 
+        attn = torch.bmm(value.view(1, 1024, 14400), attn.view(1, 14400, 14400))
+        #attn_zeros = torch.zeros([1024, 14400]) 
         #attn = torch.addmm(attn_zeros, value.view(1024, 14400), attn.view(14400, 14400))
         #attn = self.multi(value.view(1024, 14400), attn.view(14400, 14400))
         ####attn = torch.mm(value.view(1024, 14400), attn.view(14400, 14400))
