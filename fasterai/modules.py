@@ -184,7 +184,7 @@ class SelfAttention(nn.Module):
         #attn_zeros = torch.zeros([1024, 14400]) 
         #attn = torch.addmm(attn_zeros, value.view(1024, 14400), attn.view(14400, 14400))
         #attn = self.multi(value.view(1024, 14400), attn.view(14400, 14400))
-        attn = torch.mm(value.view(1024, 14400), attn)
+        attn = torch.mm(value.view(1024, 14400), attn.view(14400, 14400))
         
         
         attn = attn.view(int(shape[0]), int(shape[1]), int(shape[2]), int(shape[3]))
