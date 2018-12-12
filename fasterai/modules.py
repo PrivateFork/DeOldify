@@ -169,12 +169,12 @@ class SelfAttention(nn.Module):
         #query_zeros = torch.zeros([14400, 14400]) 
         #query_key = torch.addmm(query_zeros, query.view(14400, 128), key.view(128, 14400))
         #query_key = self.multi(query.view(14400, 128), key.view(128, 14400))
-        #########query_key = torch.mm(query.view(14400, 128), key.view(128, 14400))
+        query_key = torch.mm(query.view(14400, 128), key.view(128, 14400))
         #query_key = query_key.view(1, int(query_key.shape[0]), int(query_key.shape[1]))
         #query_key = query_key.view(1, int(14400), int(14400))
 
         ###TODEBG
-        query_key = input
+        #query_key = input
         ###TODEBG
         attn = query_key
         
