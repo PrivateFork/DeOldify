@@ -177,7 +177,7 @@ class SelfAttention(nn.Module):
         #    attn[:, x] = F.softmax(attn[:, x])
         
         ###TODEBG
-        attn = input
+        query_key = input
         ###TODEBG
         attn = F.softmax(query_key, 1)
         
