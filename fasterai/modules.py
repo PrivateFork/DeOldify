@@ -180,7 +180,7 @@ class SelfAttention(nn.Module):
         attn = query_key
         
         for x in range(int(attn.shape[1])):
-            attn[:, x] = nn.Softmax(attn[:, x])
+            attn[:, x] = nn.Softmax()(attn[:, x])
             #attn[:, x] = F.softmax(attn[:, x])
         
         #attn = torch.bmm(value.view(1, 1024, 14400), attn.view(1, 14400, 14400))
