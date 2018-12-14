@@ -138,6 +138,7 @@ class SelfAttention(nn.Module):
     def forward(self, input:torch.Tensor):
         print("forward SELFATTENTION")
         shape = input.shape
+        print(shape)
         in_channel = 1024
         query2D = nn.Conv2d(in_channel, in_channel // 8, (1, 1))
         query2DShape = self.query.weight.shape
@@ -157,7 +158,7 @@ class SelfAttention(nn.Module):
         value2D.weight = nn.Parameter(self.value.weight.view(value2DShape[0], value2DShape[1], value2DShape[2], 1))
         value2D.bias = nn.Parameter(self.value.bias.view(value2DShape2[0]))
         
-        flatten2D = input.view(int(shape[0]), int(shape[1]), 14400, 1)
+        flatten2D = input.view(int(shape[0]), int(shape[1]), int(shape[2]) * int(shape[3]), 1)
         print(flatten2D.shape)
         
         query = query2D(flatten2D)
