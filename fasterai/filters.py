@@ -60,6 +60,8 @@ class Filter(ABC):
 
     def _model_process(self, model:GeneratorModule, orig:ndarray, sz:int, gpu:int):
         orig = self._get_model_ready_image_ndarray(orig, sz)
+        print("IMAGE INPUT SHAPE")
+        print(orig.shape)
         orig = VV_(orig[None]) 
         orig = orig.to(device=gpu)
         result = model(orig)
